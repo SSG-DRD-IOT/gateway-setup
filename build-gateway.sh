@@ -15,7 +15,7 @@ mkfs.ext4 /dev/sda3
 mount /dev/sda2 /mnt
 echo '/dev/sda3	/data	auto	defaults	1	1' >> /mnt/etc/fstab
 mkdir -p /mnt/data/db
-wget -O /mnt/root http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.0.6.tgz
-tar zxvf -C /mnt/root/ /mnt/root/mongodb-linux-x86_64-3.0.6.tgz
+wget --directory-prefix=/mnt/root http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.0.6.tgz
+tar zxvf /mnt/root/mongodb-linux-x86_64-3.0.6.tgz --directory=/mnt/root/
 mv /mnt/root/mongodb-linux-x86_64-3.0.6/bin/* /mnt/usr/bin/
 
