@@ -18,4 +18,4 @@ mkdir -p /mnt/data/db
 wget -O /mnt/root http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.0.6.tgz
 tar zxvf -C /mnt/root/ /mnt/root/mongodb-linux-x86_64-3.0.6.tgz
 mv /mnt/root/mongodb-linux-x86_64-3.0.6/bin/* /mnt/usr/bin/
-reboot
+
