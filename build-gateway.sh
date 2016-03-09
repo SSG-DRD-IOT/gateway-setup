@@ -30,4 +30,6 @@ randomizeChannel () {
 installMongoDB
 randomizeChannel
 
+#paxctl -Cm /mnt/usr/bin/node
+
 shutdown -h now
