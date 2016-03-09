@@ -15,7 +15,19 @@ mkfs.ext4 /dev/sda3
 mount /dev/sda2 /mnt
 echo '/dev/sda3	/data	auto	defaults	1	1' >> /mnt/etc/fstab
 mkdir -p /mnt/data/db
-wget --directory-prefix=/mnt/root http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.0.6.tgz
-tar zxvf /mnt/root/mongodb-linux-x86_64-3.0.6.tgz --directory=/mnt/root/
-mv /mnt/root/mongodb-linux-x86_64-3.0.6/bin/* /mnt/usr/bin/
+
+installMongoDB () {
+  wget --directory-prefix=/mnt/root http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.0.6.tgz
+  tar zxvf /mnt/root/mongodb-linux-x86_64-3.0.6.tgz --directory=/mnt/root/
+  mv /mnt/root/mongodb-linux-x86_64-3.0.6/bin/* /mnt/usr/bin/
+}
+
+randomizeChannel () {
+  channels=(3 6 11)
+  channel=${channels[$RANDOM % ${#channels[@]}]}
+  sed -i -e "s/option channel  [0-9]\+/option channel  $channel/g" /etc/config/wireless
+}
+installMongoDB
+randomizeChannel
+
 shutdown -h now
