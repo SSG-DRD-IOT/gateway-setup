@@ -1,5 +1,6 @@
 #!/bin/bash
-
+# Use this command to flash the gateway
+# wget -O -  http://bit.ly/iot-gateway | bash 
 TGTDEV=/dev/sda
 
 yes | tgt=${TGTDEV} /sbin/reset_media
