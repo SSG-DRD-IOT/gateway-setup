@@ -26,7 +26,7 @@ installMongoDB () {
 randomizeChannel () {
   channels=(3 6 11)
   channel=${channels[$RANDOM % ${#channels[@]}]}
-  sed -i -e "s/option channel  [0-9]\+/option channel  $channel/g" /etc/config/wireless
+  sed -i -e "s/option channel  [0-9]\+/option channel  $channel/g" /mnt/etc/config/wireless
 }
 installMongoDB
 randomizeChannel
