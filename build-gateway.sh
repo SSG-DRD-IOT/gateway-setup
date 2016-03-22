@@ -46,10 +46,15 @@ config wifi-iface
 	option key windriveridp" > /mnt/etc/config/wireless
 }
 
+whiteListing(){
+	paxctl -Cm /mnt/usr/bin/node
+	paxctl -Cm /usr/bin/mongod
+	paxctl -Cm /usr/bin/mongo	
+}
 
 installMongoDB
 randomizeChannel
+whiteListing
 
-#paxctl -Cm /mnt/usr/bin/node
 
 shutdown -h now
