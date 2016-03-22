@@ -43,7 +43,7 @@ config wifi-iface
 	option mode 	ap
 	option ssid	$SSID
 	option encryption psk2
-	option key windriveridp" > wireless
+	option key windriveridp" > /mnt/etc/config/wireless
 }
 
 
