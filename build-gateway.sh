@@ -48,8 +48,8 @@ config wifi-iface
 
 whiteListing(){
 	paxctl -Cm /mnt/usr/bin/node
-	paxctl -Cm /usr/bin/mongod
-	paxctl -Cm /usr/bin/mongo	
+	paxctl -Cm /mnt/usr/bin/mongod
+	paxctl -Cm /mnt/usr/bin/mongo	
 }
 
 installMongoDB
