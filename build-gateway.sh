@@ -24,11 +24,29 @@ installMongoDB () {
 }
 
 randomizeChannel () {
-  cp /etc/config/wireless /mnt/etc/config/wireless
-  channels=(3 6 11)
-  channel=${channels[$RANDOM % ${#channels[@]}]}
-  sed -i -e "s/option channel  [0-9]\+/option channel  $channel/g" /mnt/etc/config/wireless
+	channels=(3 6 11)
+	channel=${channels[$RANDOM % ${#channels[@]}]}
+	MAC_FIRST_PART=$(ifconfig | egrep wlan0 | cut -d : -f 6)
+	MAC_SECOND_PART=$(ifconfig | egrep wlan0 | cut -d : -f 7)
+	SSID="IDPDK-$MAC_FIRST_PART$MAC_SECOND_PART"	
+	echo "config wifi-device  wlan0
+	option type	mac80211
+	option channel	$channel
+      	option hwmode	11n
+	option path	'pci0000:00/0000:00:1c.1/0000:02:00.0'
+	option htmode	HT20
+	option disabled	0
+
+config wifi-iface
+	option device 	wlan0
+	option network 	lan
+	option mode 	ap
+	option ssid	$SSID
+	option encryption psk2
+	option key windriveridp" > wireless
 }
+
+
 installMongoDB
 randomizeChannel
 
