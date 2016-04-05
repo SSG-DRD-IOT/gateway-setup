@@ -17,6 +17,10 @@ mount /dev/sda2 /mnt
 echo '/dev/sda3	/data	auto	defaults	1	1' >> /mnt/etc/fstab
 mkdir -p /mnt/data/db
 
+configure_sftp () {
+	perl -pi -w -e "s/\/usr\/lib64\/openssh\/sftp-server/internal-sftp/g" /etc/ssh/sshd_config
+}
+
 installMongoDB () {
   wget --directory-prefix=/mnt/root http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.0.6.tgz
   tar zxvf /mnt/root/mongodb-linux-x86_64-3.0.6.tgz --directory=/mnt/root/
@@ -54,6 +58,7 @@ whiteListing(){
 
 installMongoDB
 randomizeChannel
+configure_sftp
 whiteListing
 
 
