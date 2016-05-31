@@ -3,8 +3,12 @@
 # wget -O - http://bit.ly/iot-gateway | bash 
 
 flash_gateway () {
+	# Flash the image to the Gateway
 	yes | /sbin/deploytool -d /dev/sda --reset-media -F
-	VOLUME_GROUP_NAME=$(pvscan | egrep sda | cut -d ' ' -f 8)
+	
+	# Mount the logical volume that contains the newly flashed image root
+	vgchange -a y
+	VOLUME_GROUP_NAME=$(pvscan | egrep sda | cut -d ' ' -f 12)
 	LOGICAL_VOLUME_NAME=$(lvdisplay $VOLUME_GROUP_NAME | egrep "LV Name" | sed 's/\s\s*/ /g'|cut -d ' ' -f 4)
 	MOUNT_PATH=/dev/$VOLUME_GROUP_NAME/$LOGICAL_VOLUME_NAME
 	mount $MOUNT_PATH /mnt
