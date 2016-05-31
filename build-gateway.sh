@@ -36,7 +36,7 @@ randomizeChannel () {
 	echo "config wifi-device  wlan0
 	option type	mac80211
 	option channel	$channel
-      	option hwmode	11n
+      	option hwmode	11ng
 	option path	'pci0000:00/0000:00:1c.1/0000:02:00.0'
 	option htmode	HT20
 	option disabled	0
