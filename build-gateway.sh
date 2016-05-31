@@ -55,11 +55,21 @@ whitelisting(){
 	paxctl -Cm /mnt/usr/bin/mongo	
 }
 
+install_docs () {
+	mkdir -p /mnt/root/docs
+	cd /mnt/root/docs
+	git clone https://github.com/SSG-DRD-IOT/commercial-iot-labs-interface.git
+	npm install grunt-cli bower -g
+	npm install
+	bower install
+}
+
 flash_gateway
 install_mongodb
 randomize_channel
 configure_sftp
 whitelisting
+install_docs
 
 
 #shutdown -h now
