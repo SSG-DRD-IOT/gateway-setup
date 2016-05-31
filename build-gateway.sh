@@ -18,14 +18,14 @@ configure_sftp () {
 	perl -pi -w -e "s/\/usr\/lib64\/openssh\/sftp-server/internal-sftp/g" /etc/ssh/sshd_config
 }
 
-installMongoDB () {
+install_mongodb () {
   mkdir -p /mnt/data/db
   wget --directory-prefix=/mnt/root http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.0.6.tgz
   tar zxvf /mnt/root/mongodb-linux-x86_64-3.0.6.tgz --directory=/mnt/root/
   mv /mnt/root/mongodb-linux-x86_64-3.0.6/bin/* /mnt/usr/bin/
 }
 
-randomizeChannel () {
+randomize_channel () {
 	channels=(3 6 11)
 	channel=${channels[$RANDOM % ${#channels[@]}]}
 	MAC_FIRST_PART=$(ifconfig | egrep wlan0 | cut -d : -f 6)
@@ -48,17 +48,17 @@ config wifi-iface
 	option key windriveridp" > /mnt/etc/config/wireless
 }
 
-whiteListing(){
+whitelisting(){
 	paxctl -Cm /mnt/usr/bin/node
 	paxctl -Cm /mnt/usr/bin/mongod
 	paxctl -Cm /mnt/usr/bin/mongo	
 }
 
 flash_gateway
-installMongoDB
-randomizeChannel
+install_mongodb
+randomize_channel
 configure_sftp
-whiteListing
+whitelisting
 
 
 #shutdown -h now
