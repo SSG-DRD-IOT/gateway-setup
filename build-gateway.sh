@@ -4,7 +4,7 @@
 
 flash_gateway () {
 	# Flash the image to the Gateway
-	#yes | /sbin/deploytool -d /dev/sda --reset-media -F
+	yes | /sbin/deploytool -d /dev/sda --reset-media -F
 	
 	# Mount the logical volume that contains the newly flashed image root
 	VOLUME_GROUP_NAME=$(pvscan | egrep sda | cut -d ' ' -f 12)
