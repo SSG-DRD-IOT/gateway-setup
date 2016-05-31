@@ -57,4 +57,4 @@ configure_sftp
 whiteListing
 
 
-shutdown -h now
+#shutdown -h now
