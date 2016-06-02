@@ -60,9 +60,9 @@ install_docs () {
 	cd /mnt/root/docs
 	git clone https://github.com/SSG-DRD-IOT/commercial-iot-labs-interface.git
 	cd commercial-iot-labs-interface
-	npm install --prefix /mnt/usr/libs/node_modules/ grunt-cli bower
+	npm install --prefix /mnt/usr/lib/node_modules/ grunt-cli bower
 	npm install
-	/mnt/usr/libs/node_modules/lib/node_modules/bower install --allow-root
+	/mnt/usr/lib/node_modules/bower/bin/bower install --allow-root
 }
 
 flash_gateway
