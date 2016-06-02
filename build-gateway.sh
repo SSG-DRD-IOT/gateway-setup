@@ -63,6 +63,7 @@ install_docs () {
 	npm install --prefix /mnt/usr/lib/node_modules/ grunt-cli bower
 	npm install
 	/mnt/usr/lib/node_modules/bower/bin/bower install --allow-root
+	/mnt/usr/lib/node_modules/grunt-cli/bin/grunt build
 }
 
 flash_gateway
