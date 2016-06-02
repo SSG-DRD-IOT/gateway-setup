@@ -60,7 +60,7 @@ install_docs () {
 	cd /mnt/root/docs
 	git clone https://github.com/SSG-DRD-IOT/commercial-iot-labs-interface.git
 	cd commercial-iot-labs-interface
-	npm install --prefix /mnt/usr/lib/node_modules/ grunt-cli bower
+	npm install --prefix /mnt/usr/lib/ grunt-cli bower
 	npm install
 	/mnt/usr/lib/node_modules/bower/bin/bower install --allow-root
 	/mnt/usr/lib/node_modules/grunt-cli/bin/grunt build
