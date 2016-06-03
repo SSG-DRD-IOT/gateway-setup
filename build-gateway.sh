@@ -71,7 +71,7 @@ install_mongodb
 randomize_channel
 configure_sftp
 whitelisting
-install_docs
+#install_docs
 
 
 #shutdown -h now
