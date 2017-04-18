@@ -28,10 +28,15 @@ EOT
 
 echo -e "${Y}Install package dependencies...${NC}\n"
 sleep 2
-
 apt-get install -y software-properties-common build-essential libssl-dev libkrb5-dev checkinstall
 apt-get install -y avahi-daemon avahi-autoipd avahi-utils libavahi-compat-libdnssd-dev
 apt-get install -y libtool automake
+apt-get install -y openssh-client openssh-server
+
+echo -e "${Y}Modify the sshd_config file for ssh access to root user, it is disabled by default and restrart sshd...${NC}\n"
+sleep 2
+sed -ie 's/prohibit-password/yes/g' /etc/ssh/sshd_config
+systemctl restart sshd
 
 echo -e "${Y}Install mosquitto broker and client modules...${NC}\n"
 sleep 2
@@ -56,9 +61,10 @@ npm install -g upm
 npm install -g jsupm_grove
 npm install -g jsupm_i2clcd
 
-echo -e "${Y}Install Node-Red npm package...${NC}\n"
+echo -e "${Y}Install Node-Red and Node-Red UPM Grove kit - npm packages...${NC}\n"
 sleep 2
 npm install -g node-red
+npm install -g node-red-contrib-upm
 
 echo -e "${Y}Create and start Node-Red system service...${NC}\n"
 sleep 2
