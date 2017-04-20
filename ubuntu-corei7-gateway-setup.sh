@@ -33,6 +33,10 @@ apt-get install -y avahi-daemon avahi-autoipd avahi-utils libavahi-compat-libdns
 apt-get install -y libtool automake
 apt-get install -y openssh-client openssh-server
 
+echo -e "${Y}Install MongoDB package...${NC}\n"
+sleep 2
+apt-get install -y mongodb
+
 echo -e "${Y}Modify the sshd_config file for ssh access to root user, it is disabled by default and restrart sshd...${NC}\n"
 sleep 2
 sed -ie 's/prohibit-password/yes/g' /etc/ssh/sshd_config
@@ -63,15 +67,28 @@ npm install -g jsupm_i2clcd
 
 echo -e "${Y}Install Node-Red and Node-Red UPM Grove kit - npm packages...${NC}\n"
 sleep 2
-useradd node-red -G dialout
-mkdir /home/node-red
-chown -R node-red:node-red /home/node-red
 npm install -g node-red
 npm install -g node-red-contrib-upm
 
-echo -e "${Y}Create and start Node-Red system service...${NC}\n"
+echo -e "${Y}Create Node-Red user and add it to dialout group for access to ttyACM0 device...${NC}\n"
+sleep 2
+useradd node-red -G dialout
+mkdir -p /home/node-red
+chown -R node-red:node-red /home/node-red
+
+echo -e "${Y}Create Node-Red system service...${NC}\n"
 sleep 2
 create_nodered_service_file
+
+echo -e "${Y}Download and setup the default Node-Red node to get IP address on LCD and start Node-Red service...${NC}\n"
+sleep 2
+git clone https://github.com/SSG-DRD-IOT/gateway-setup.git
+cp gateway-setup/flows_ip.json /home/node-red/.node-red/flows_$HOSTNAME.json
+
+#Delete the folder downloaded
+rm -rf gateway-setup
+
+#Enable and start the node red service
 systemctl enable node-red-experience
 systemctl start node-red-experience
 systemctl status node-red-experience
