@@ -17,7 +17,7 @@ cat <<EOT > /lib/systemd/system/node-red-experience.service
 After=syslog.target network.target mraa-imraa.service
 
 [Service]
-User=root
+User=node-red
 ExecStart=/usr/bin/node-red
 Environment="NODE_PATH=/usr/lib/node_modules"
 
@@ -63,6 +63,9 @@ npm install -g jsupm_i2clcd
 
 echo -e "${Y}Install Node-Red and Node-Red UPM Grove kit - npm packages...${NC}\n"
 sleep 2
+useradd node-red -G dialout
+mkdir /home/node-red
+chown -R node-red:node-red /home/node-red
 npm install -g node-red
 npm install -g node-red-contrib-upm
 
