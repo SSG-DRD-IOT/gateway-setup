@@ -1,0 +1,7 @@
+[Unit]
+After=syslog.target network.target mraa-imraa.service
+
+[Service]
+User=node-red
+ExecStart=/usr/bin/node-red
+Environment="NODE_PATH=/usr/lib/node_modules"
