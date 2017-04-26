@@ -111,3 +111,4 @@ cd xdk-daemon-0100-x64-node-4.5.0
 echo -e "${Y}********** End of Script ***********${NC}\n"
 sleep 3
 echo -e "${Y}********** Rebooting after installation **********${NC}\n"
+reboot
