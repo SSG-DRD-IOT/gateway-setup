@@ -90,7 +90,8 @@ cp dfu-util /usr/bin/
 systemctl daemon-reload
 
 #Enable and start the node red service
-systemctl enable node-red-experience
+systemctl enable node-red-experience.path
+systemctl enable node-red-experience.service
 systemctl start node-red-experience
 systemctl status node-red-experience
 
