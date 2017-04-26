@@ -12,12 +12,12 @@ platform=$(cat /sys/devices/virtual/dmi/id/board_name)
 echo -e "${Y}********** Start of Script ***********${NC}\n"
 
 if [[ $EUID -ne 0 ]]; then
-    echo -e "${Y}This script must be run as root${NC}\n" 
+    echo -e "${Y}This script must be run as root${NC}\n"
     exit 1
 fi
 
 if [ "$CUR_DIR" != "$GATEWAY_DIR" ]; then
-    echo -e "${Y}Check your current working directory!${NC}\n"    
+    echo -e "${Y}Check your current working directory!${NC}\n"
     echo -e "${Y}Download your installation script and configuration files from github and then execute this script with following commands:${NC}\n"
     echo -e "${Y}git clone https://github.com/SSG-DRD-IOT/gateway-setup.git${NC}\n"
     echo -e "${Y}cd gateway-setup${NC}\n"
