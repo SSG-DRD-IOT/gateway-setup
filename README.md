@@ -35,9 +35,8 @@ English all (default settings, just hit enter)
 
 * Sudo passwd root
 * Enter: root
-* `<su root>`
+* `su root`
 * password: root
-
-Git clone https://github.com/SSG-DRD-IOT/gateway-setup.git
-Cd gateway-setup
-ubuntu-gateway-setup.sh
+* `git clone https://github.com/SSG-DRD-IOT/gateway-setup.git`
+* `cd gateway-setup`
+* `ubuntu-gateway-setup.sh`
