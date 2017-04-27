@@ -1,7 +1,7 @@
-#Ubuntu on NUC
+# Ubuntu on NUC
 
 
-Install Ubuntu Server
+## Install Ubuntu Server
 
 English all (default settings, just hit enter)
 
@@ -44,4 +44,4 @@ password: root
 
 Git clone https://github.com/SSG-DRD-IOT/gateway-setup.git
 Cd gateway-setup
-Ubuntu-corei7-gateway-setup.sh
+ubuntu-gateway-setup.sh
