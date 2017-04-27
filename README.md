@@ -19,10 +19,14 @@ If 4GB model:
 Manual partition:
 Delete all partitions 
 Create 150MB logical at beginning, use as EFI system partition area – bootable flag on
+
 Create 3.7 primary, use as Ext4, mount point /, bootable flag off
+
 Create ~100 MB (rest of disk) logical at beginning, use as swap area – bootable flag off,
+
 Finish partition and write changes to disk
- continue install
+
+continue install
 
 if 64GB:
 use guided partition: use entire disk
