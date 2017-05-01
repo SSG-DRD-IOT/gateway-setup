@@ -1,8 +1,0 @@
-[Unit]
-Description= Triggers tnode-red after /tmp/imraa.lock is created
-
-[Path]
-PathExists=/tmp/imraa.lock
-
-[Install]
-WantedBy=multi-user.target

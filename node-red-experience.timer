@@ -1,0 +1,9 @@
+[Unit]
+Description=Run node-red-experience service after some delay
+
+[Timer]
+OnBootSec=25sec
+Unit=node-red-experience.service
+
+[Install]
+WantedBy=multi-user.target

@@ -1,7 +1,11 @@
 [Unit]
-After=syslog.target network.target mraa-imraa.service
+Description=Service to launch node-red program
 
 [Service]
 User=node-red
 ExecStart=/usr/bin/node-red
 Environment="NODE_PATH=/usr/lib/node_modules"
+
+[Install]
+WantedBy=multi-user.target
+
