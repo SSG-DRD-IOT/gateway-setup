@@ -77,7 +77,7 @@ chown -R node-red:node-red /home/node-red
 
 echo -e "${Y}Setup imraa & Node-Red services and default flows...${NC}\n"
 cp node-red-experience.timer /lib/systemd/system/node-red-experience.timer
-cp node-red-experience.path /lib/systemd/system/node-red-experience.path
+cp node-red-experience.service /lib/systemd/system/node-red-experience.service
 cp mraa-imraa.service /lib/systemd/system/mraa-imraa.service
 cp flows_ip.json /home/node-red/.node-red/flows_$HOSTNAME.json
 cp dfu-util /usr/bin/
@@ -100,7 +100,7 @@ tar xvf xdk-daemon-0100-x64-ubuntu-anyboard-node-4.5.0_master.tar.bz2
 cd xdk-daemon-0100-x64-node-4.5.0
 ./setup.sh
 
-echo -e "${Y}********** End of Script ***********${NC}\n"
-sleep 3
+echo -e "\n${Y}********** End of Script ***********${NC}\n"
 echo -e "${Y}********** Rebooting after installation **********${NC}\n"
+sleep 3
 reboot
