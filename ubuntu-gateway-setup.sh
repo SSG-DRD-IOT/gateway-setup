@@ -1,8 +1,15 @@
 #!/bin/bash
 
+#Create a log file in same directory to store output of the script
+timestamp=$(date +%s)
+exec > >(tee -ia ubuntu-gateway-install-log-$timestamp.log)
+exec 2> >(tee -ia ubuntu-gateway-install-log-$timestamp.log >&2)
+
+#To change color to yellow for info text
 Y='\033[1;33m'
 NC='\033[0m'
 
+#Get the board details
 ATOM_PLATFORM="DE3815TYKH"
 CORE_PLATFORM="NUC5i7RYB"
 GATEWAY_DIR="gateway-setup"
@@ -17,10 +24,10 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 if [ "$CUR_DIR" != "$GATEWAY_DIR" ]; then
-    echo -e "${Y}Check your current working directory!${NC}\n"
-    echo -e "${Y}Download your installation script and configuration files from github and then execute this script with following commands:${NC}\n"
-    echo -e "${Y}git clone https://github.com/SSG-DRD-IOT/gateway-setup.git${NC}\n"
-    echo -e "${Y}cd gateway-setup${NC}\n"
+    echo -e "${Y}ERROR!! Check your current working directory!${NC}\n"
+    echo -e "${Y}Download your installation script and configuration files from github and then execute this script with following commands:${NC}"
+    echo -e "${Y}git clone https://github.com/SSG-DRD-IOT/gateway-setup.git${NC}"
+    echo -e "${Y}cd gateway-setup${NC}"
     echo -e "${Y}./ubuntu-corei7-gateway-setup.sh${NC}\n"
     exit 1
 fi
@@ -48,6 +55,14 @@ if [ "$platform" == "$CORE_PLATFORM" ]; then
 
     echo -e "${Y}Install grafana module...${NC}\n"
     apt-get install -y grafana
+
+    echo -e "${Y}Install docker and it's dependencies...${NC}\n"
+    apt-get install apt-transport-https
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    apt-key fingerprint 0EBFCD88
+    add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+    apt-get update
+    apt-get install docker-ce
 fi
 
 echo -e "${Y}Install Node..${NC}\n"
