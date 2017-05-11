@@ -5,6 +5,8 @@ Description=Service to launch node-red program
 User=node-red
 ExecStart=/usr/bin/node-red
 Environment="NODE_PATH=/usr/lib/node_modules"
+Restart=on-failure
+KillSignal=SIGINT
 
 [Install]
 WantedBy=multi-user.target
