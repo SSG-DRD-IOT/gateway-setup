@@ -30,13 +30,20 @@ English all (default settings, just hit enter)
 
 
 ### Once booted:
-* Connect your Arduino 101 through USB to your NUC
 * After you log in with your credentials enter following commands:
   `cd ~`
+  &#13;
   `sudo passwd root`
+  &#13;
   `Enter: root`
+  &#13;
   `su root`
+  &#13;
   `password: root`
+  &#13;
   `git clone https://github.com/SSG-DRD-IOT/gateway-setup.git`
+  &#13;
   `cd gateway-setup`
+  &#13;
   `\.ubuntu-gateway-setup.sh`
+  &#13;
