@@ -1,6 +1,8 @@
 #!/bin/bash
 
-apt install wpa_supplicant
+apt update
+
+apt install wpasupplicant
 
 apt install wireless-tools
 
