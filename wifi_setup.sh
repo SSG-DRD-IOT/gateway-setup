@@ -6,7 +6,7 @@ apt install wpasupplicant
 
 apt install wireless-tools
 
-mv /etc/network/interfaces /etc/network/interfaces.old
+rm /etc/network/interfaces
 
 (echo source /etc/network/interfaces.d/*
 echo auto lo
