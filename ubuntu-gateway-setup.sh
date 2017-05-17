@@ -34,9 +34,26 @@ install_hdc() {
     iot-control -c /var/lib/iot/startup.bin
 }
 
+install_atom_modules() {
+    echo -e "${Y}Install atom modules: nuclide and watchman...${NC}\n"
+
+    #Install nuclide
+    npm install -g nuclide
+
+    #Install facebook's watchman module required for Atom
+    git clone https://github.com/facebook/watchman.git
+    cd watchman
+    git checkout v4.7.0
+    ./autogen.sh
+    ./configure
+    make
+    make install
+    cd -
+}
+
 install_node() {
     echo -e "${Y}Install Node..${NC}\n"
-    curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
+    curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
     apt-get install -y nodejs
 }
 
@@ -79,18 +96,10 @@ install_mraa_upm_plugins() {
     npm install -g jsupm_i2clcd
 }
 
-install_xdk_daemon() {
-    echo -e "${Y}Download and Install Intel XDK daemon...${NC}\n"
-    wget http://download.xdk.intel.com/iot/xdk-daemon-0100-x64-ubuntu-anyboard-node-4.5.0_master.tar.bz2
-    tar xvf xdk-daemon-0100-x64-ubuntu-anyboard-node-4.5.0_master.tar.bz2
-    cd xdk-daemon-0100-x64-node-4.5.0
-    ./setup.sh
-}
-
 echo -e "${Y}********** Start of Script ***********${NC}\n"
 
 if [[ $EUID -ne 0 ]]; then
-    echo -e "${Y}This script must be run as root${NC}\n"
+    echo -e "${Y}This script must be run as root (e.g. sudo ./ubuntu-gateway-setup.sh)${NC}\n"
     exit 1
 fi
 
@@ -99,7 +108,7 @@ if [ "$CUR_DIR" != "$GATEWAY_DIR" ]; then
     echo -e "${Y}Download your installation script and configuration files from github and then execute this script with following commands:${NC}"
     echo -e "${Y}git clone https://github.com/SSG-DRD-IOT/gateway-setup.git${NC}"
     echo -e "${Y}cd gateway-setup${NC}"
-    echo -e "${Y}./ubuntu-corei7-gateway-setup.sh${NC}\n"
+    echo -e "${Y}sudo ./ubuntu-gateway-setup.sh${NC}\n"
     exit 1
 fi
 
@@ -132,6 +141,10 @@ if [ "$platform" == "$CORE_PLATFORM" ]; then
 
     #Install and configure Helix Device Cloud (HDC) agent
     install_hdc
+
+    #Install Atom editor modules
+    install_atom_modules
+
 fi
 
 #Install Node
@@ -149,8 +162,8 @@ echo 'export NODE_PATH=/usr/lib/node_modules/' >> ~/.bashrc
 #script exits
 source ~/.bashrc
 
-#Download and install XDK daemon to connect to XDK
-install_xdk_daemon
+echo -e "${Y}Give read & write permission to ttyACM0 device...${NC}\n"
+chmod 666 /dev/ttyACM0
 
 echo -e "\n${Y}********** End of Script ***********${NC}\n"
 echo -e "${Y}********** Rebooting after installation **********${NC}\n"
