@@ -37,8 +37,8 @@ install_hdc() {
 install_atom_modules() {
     echo -e "${Y}Install atom modules: nuclide and watchman...${NC}\n"
 
-    #Install nuclide
-    npm install -g nuclide
+    #Install nuclide version 0.226.0 (same as client version on atom)
+    npm install -g nuclide@0.226.0
 
     #Install facebook's watchman module required for Atom
     git clone https://github.com/facebook/watchman.git
