@@ -30,15 +30,9 @@ English all (default settings, just hit enter)
 
 
 ### Once booted:
-* After you log in with your credentials enter following commands:  
-  `nuc-user@ubuntu-nuc:~$ sudo passwd root`  
-* Enter your password and then new UNIX password as 'root' for 'root' login  
-* Next switch to root user  
-  `nuc-user@ubuntu-nuc:~$ su root`  
-* Give the password 'root' which you just set  
-* Next fetch the ubuntu installation script and run it  
-  `root@ubuntu-nuc:/home/nuc-user# cd ~`  
-  `root@ubuntu-nuc:~# git clone https://github.com/SSG-DRD-IOT/gateway-setup.git`  
-  `root@ubuntu-nuc:~# cd gateway-setup`  
-  `root@ubuntu-nuc:~/gateway-setup# ./ubuntu-gateway-setup.sh`  
+* Connect your Arduino 101 with LCD to your Gateway device  
+* After you log in with your credentials enter following commands to download and run the script:  
+  `nuc-user@ubuntu-nuc:~# git clone https://github.com/SSG-DRD-IOT/gateway-setup.git`  
+  `nuc-user@ubuntu-nuc:~# cd gateway-setup`  
+  `nuc-user@ubuntu-nuc:~/gateway-setup#sudo ./ubuntu-gateway-setup.sh`  
 * After script completes your system will reboot
