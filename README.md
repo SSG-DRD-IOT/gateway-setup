@@ -3,6 +3,8 @@
 
 ## Install Ubuntu Server
 
+### Boot USB in UEFI mode
+
 English all (default settings, just hit enter)
 
 * Hostname: ubuntu-nuc
