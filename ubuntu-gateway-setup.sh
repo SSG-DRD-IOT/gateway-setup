@@ -114,7 +114,7 @@ fi
 
 echo -e "${Y}Install package dependencies...${NC}\n"
 apt-get install -y software-properties-common build-essential libssl-dev libkrb5-dev checkinstall
-apt-get install -y avahi-daemon avahi-autoipd avahi-utils libavahi-compat-libdnssd-dev
+apt-get install -y avahi-daemon avahi-autoipd avahi-utils libavahi-compat-libdnssd-dev python-dev
 apt-get install -y libtool automake
 apt-get install -y openssh-client openssh-server
 
