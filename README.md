@@ -26,7 +26,7 @@ English all (default settings, just hit enter)
 * Manual partition:
 * Delete all partitions 
 * Create 150MB logical at beginning, use as EFI system partition area – bootable flag on
-* Create 3.7 primary, use as Ext4, mount point /, bootable flag off
+* Create 3.7GB primary at beginning, use as Ext4, mount point /, bootable flag off
 * Create ~100 MB (rest of disk) logical at beginning, use as swap area – bootable flag off,
 * Finish partition and write changes to disk
 
