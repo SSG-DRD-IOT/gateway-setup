@@ -122,6 +122,9 @@ echo -e "${Y}Modify the sshd_config file for ssh access to root user, it is disa
 sed -ie 's/prohibit-password/yes/g' /etc/ssh/sshd_config
 systemctl restart sshd
 
+#Install Node
+install_node
+
 #Configuration required only for our labs running core i7
 if [ "$platform" == "$CORE_PLATFORM" ]; then
     echo -e "${Y}Install MongoDB package...${NC}\n"
@@ -146,9 +149,6 @@ if [ "$platform" == "$CORE_PLATFORM" ]; then
     install_atom_modules
 
 fi
-
-#Install Node
-install_node
 
 #Install MRAA UPM and plugins for JS
 install_mraa_upm_plugins

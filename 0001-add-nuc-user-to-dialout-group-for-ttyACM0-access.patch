@@ -1,0 +1,27 @@
+From 127aebb118e7757ed2e82179928631edb0949d38 Mon Sep 17 00:00:00 2001
+From: Huzefa N K <huzefank@gmail.com>
+Date: Mon, 22 May 2017 12:30:55 -0700
+Subject: [PATCH] add nuc-user to dialout group for ttyACM0 access
+
+---
+ ubuntu-gateway-setup.sh | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/ubuntu-gateway-setup.sh b/ubuntu-gateway-setup.sh
+index 5f0756f..b505c64 100755
+--- a/ubuntu-gateway-setup.sh
++++ b/ubuntu-gateway-setup.sh
+@@ -162,8 +162,8 @@ echo 'export NODE_PATH=/usr/lib/node_modules/' >> ~/.bashrc
+ #script exits
+ source ~/.bashrc
+ 
+-echo -e "${Y}Give read & write permission to ttyACM0 device...${NC}\n"
+-chmod 666 /dev/ttyACM0
++echo -e "${Y}Add nuc-user to dialout group for access to ttyACM0 device...${NC}\n"
++usermod nuc-user -G dialout
+ 
+ echo -e "\n${Y}********** End of Script ***********${NC}\n"
+ echo -e "${Y}********** Rebooting after installation **********${NC}\n"
+-- 
+1.9.1
+
