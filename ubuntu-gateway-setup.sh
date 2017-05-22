@@ -163,7 +163,7 @@ echo 'export NODE_PATH=/usr/lib/node_modules/' >> ~/.bashrc
 source ~/.bashrc
 
 echo -e "${Y}Add nuc-user to dialout group for access to ttyACM0 device...${NC}\n"
-usermod nuc-user -G dialout
+usermod nuc-user -a -G dialout
 
 echo -e "\n${Y}********** End of Script ***********${NC}\n"
 echo -e "${Y}********** Rebooting after installation **********${NC}\n"
