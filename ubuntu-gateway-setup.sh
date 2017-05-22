@@ -162,8 +162,8 @@ echo 'export NODE_PATH=/usr/lib/node_modules/' >> ~/.bashrc
 #script exits
 source ~/.bashrc
 
-echo -e "${Y}Give read & write permission to ttyACM0 device...${NC}\n"
-chmod 666 /dev/ttyACM0
+echo -e "${Y}Add nuc-user to dialout group for access to ttyACM0 device...${NC}\n"
+usermod nuc-user -G dialout
 
 echo -e "\n${Y}********** End of Script ***********${NC}\n"
 echo -e "${Y}********** Rebooting after installation **********${NC}\n"
