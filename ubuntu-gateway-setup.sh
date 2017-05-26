@@ -96,6 +96,11 @@ install_mraa_upm_plugins() {
     npm install -g jsupm_i2clcd
 }
 
+install_bower() {
+    echo -e "${Y}Install bower module required for admin interface...${NC}\n"
+    npm install -g bower
+}
+
 echo -e "${Y}********** Start of Script ***********${NC}\n"
 
 if [[ $EUID -ne 0 ]]; then
@@ -155,6 +160,9 @@ install_mraa_upm_plugins
 
 #Install and configure node-red module
 install_and_setup_node-red
+
+#Install bower module for admin interface lab
+install_bower
 
 echo -e "${Y}Export node path(NODE_PATH) by adding it to bashrc file...${NC}\n"
 echo 'export NODE_PATH=/usr/lib/node_modules/' >> ~/.bashrc
