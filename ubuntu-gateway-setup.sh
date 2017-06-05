@@ -5,9 +5,11 @@ timestamp=$(date +%s)
 exec > >(tee -ia ubuntu-gateway-install-log-$timestamp.log)
 exec 2> >(tee -ia ubuntu-gateway-install-log-$timestamp.log >&2)
 
-#To change color to yellow for info text
-Y='\033[1;33m'
-NC='\033[0m'
+#To change color for text output
+Y='\033[1;33m' #Yellow
+R='\033[0;31m' #Red
+G='\033[0;32m' #Green
+NC='\033[0m'   #No color
 
 #Get the board details
 ATOM_PLATFORM="DE3815TYKH"
@@ -60,7 +62,7 @@ install_node() {
 install_and_setup_node-red() {
     echo -e "${Y}Install Node-Red and it's UPM Grove kit npm packages...${NC}\n"
     npm install -g node-red
-    npm install -g node-red-contrib-upm
+    npm install -g node-red-contrib-upm@0.3.5
 
     echo -e "${Y}Create & add Node-Red user to dialout group for ttyACM0 access${NC}\n"
     useradd node-red -G dialout
@@ -90,10 +92,10 @@ install_mraa_upm_plugins() {
 
     echo -e "${Y}Install MRAA and UPM plugins for java script...${NC}\n"
     #Install MRAA & UPM plugins for java script
-    npm install -g mraa
+    npm install -g mraa@1.7.0
     #npm install -g upm
-    npm install -g jsupm_grove
-    npm install -g jsupm_i2clcd
+    npm install -g jsupm_grove@1.0.2-src
+    npm install -g jsupm_i2clcd@1.0.2-src
 }
 
 install_bower() {
@@ -104,18 +106,46 @@ install_bower() {
 echo -e "${Y}********** Start of Script ***********${NC}\n"
 
 if [[ $EUID -ne 0 ]]; then
-    echo -e "${Y}This script must be run as root (e.g. sudo ./ubuntu-gateway-setup.sh)${NC}\n"
+    echo -e "${R}This script must be run as root (e.g. sudo ./ubuntu-gateway-setup.sh)${NC}\n"
     exit 1
 fi
 
 if [ "$CUR_DIR" != "$GATEWAY_DIR" ]; then
-    echo -e "${Y}ERROR!! Check your current working directory!${NC}\n"
+    echo -e "${R}ERROR!! Check your current working directory!${NC}\n"
     echo -e "${Y}Download your installation script and configuration files from github and then execute this script with following commands:${NC}"
-    echo -e "${Y}git clone https://github.com/SSG-DRD-IOT/gateway-setup.git${NC}"
-    echo -e "${Y}cd gateway-setup${NC}"
-    echo -e "${Y}sudo ./ubuntu-gateway-setup.sh${NC}\n"
+    echo -e "${G}git clone https://github.com/SSG-DRD-IOT/gateway-setup.git${NC}"
+    echo -e "${G}cd gateway-setup${NC}"
+    echo -e "${G}sudo ./ubuntu-gateway-setup.sh${NC}\n"
     exit 1
 fi
+
+usage="sudo "$0" [-h] [-p n] -- script to setup your Ubuntu server for Intel NUC gateway
+
+where:
+    -h  show this help text
+    -p  set the proxy value in format http://<proxy>:<port> (default is blank)"
+
+PROXY_VAR=
+while getopts ':hp:' option; do
+  case "$option" in
+    h) echo -e "$usage"
+       exit
+       ;;
+    p) PROXY_VAR=$OPTARG
+       ;;
+    :) printf "${R}missing argument for -%s\n${NC}" "$OPTARG" >&2
+       echo "$usage" >&2
+       exit 1
+       ;;
+   \?) printf "${R}illegal option: -%s\n${NC}" "$OPTARG" >&2
+       echo "$usage" >&2
+       exit 1
+       ;;
+  esac
+done
+shift $((OPTIND - 1))
+
+echo -e "${Y}Proxy variable is set as ${G}$PROXY_VAR${NC}\n"
 
 echo -e "${Y}Install package dependencies...${NC}\n"
 apt-get install -y software-properties-common build-essential libssl-dev libkrb5-dev checkinstall
@@ -127,8 +157,16 @@ echo -e "${Y}Modify the sshd_config file for ssh access to root user, it is disa
 sed -ie 's/prohibit-password/yes/g' /etc/ssh/sshd_config
 systemctl restart sshd
 
+#system proxy settings
+export http_proxy=$PROXY_VAR
+export https_proxy=$PROXY_VAR
+
 #Install Node
 install_node
+
+#npm proxy settings
+npm config set proxy $PROXY_VAR
+npm config set https-proxy $PROXY_VAR
 
 #Configuration required only for our labs running core i7
 if [ "$platform" == "$CORE_PLATFORM" ]; then
