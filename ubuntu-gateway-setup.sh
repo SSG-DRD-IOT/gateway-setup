@@ -158,15 +158,19 @@ sed -ie 's/prohibit-password/yes/g' /etc/ssh/sshd_config
 systemctl restart sshd
 
 #system proxy settings
-export http_proxy=$PROXY_VAR
-export https_proxy=$PROXY_VAR
+if [ -n "$PROXY_VAR" ]; then
+    export http_proxy=$PROXY_VAR
+    export https_proxy=$PROXY_VAR
+fi
 
 #Install Node
 install_node
 
 #npm proxy settings
-npm config set proxy $PROXY_VAR
-npm config set https-proxy $PROXY_VAR
+if [ -n "$PROXY_VAR" ]; then
+    npm config set proxy $PROXY_VAR
+    npm config set https-proxy $PROXY_VAR
+fi
 
 #Configuration required only for our labs running core i7
 if [ "$platform" == "$CORE_PLATFORM" ]; then
