@@ -13,17 +13,18 @@ English all (default settings, just hit enter)
 * Use weak password - YES
 * Encryption - No
 
+
 ### If installing over Windriver:
 
 * Configure Logical Volume Manager
 * YES
-* Delete Volume Group
-* Select both volume groups
+* Delete logical volume
+* Select volume group
 * Reduce Volume Group
-* Select Volume Group 
+* Select /dev/mmcblk0p2 and /dev/mmcblk0p2 
 * Go Back
 * Force UEFI Install -YES
-* Continue to manual partition
+* Reboot and continue to manual partition
 
 ### If 64GB or more:
 * use guided partition: use entire disk
