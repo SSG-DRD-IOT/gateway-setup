@@ -64,8 +64,9 @@ install_and_setup_node-red() {
     npm install -g node-red
     npm install -g node-red-contrib-upm@0.3.5
 
-    echo -e "${Y}Create & add Node-Red user to dialout group for ttyACM0 access${NC}\n"
+    echo -e "${Y}Create & add Node-Red and nuc-user user to dialout group for ttyACM0 access${NC}\n"
     useradd node-red -G dialout
+    useradd nuc-user -G dialout
     mkdir -p /home/node-red/.node-red
     chown -R node-red:node-red /home/node-red
 
