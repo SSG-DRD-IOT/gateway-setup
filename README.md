@@ -12,8 +12,18 @@ English all (default settings, just hit enter)
 * Password: root
 * Use weak password - YES
 * Encryption - No
-* Force UEFI Install -YES
 
+### If installing over Windriver:
+
+* Configure Logical Volume Manager
+* YES
+* Delete Volume Group
+* Select both volume groups
+* Reduce Volume Group
+* Select Volume Group 
+* Go Back
+* Force UEFI Install -YES
+* Continue to manual partition
 
 ### If 64GB or more:
 * use guided partition: use entire disk
