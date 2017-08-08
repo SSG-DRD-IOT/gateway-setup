@@ -3,7 +3,7 @@
 
 ## Install Ubuntu Server
 
-### Boot USB in UEFI mode
+### Boot USB in UEFI mode - press f10 at boot and select uefi usb as boot device
 
 English all (default settings, just hit enter)
 
