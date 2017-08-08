@@ -39,6 +39,9 @@ English all (default settings, just hit enter)
 * Create 3.7GB primary at beginning, use as Ext4, mount point /, bootable flag off
 * Create ~100 MB (rest of disk) logical at beginning, use as swap area – bootable flag off,
 * Finish partition and write changes to disk
+* No proxy
+* Install security updates automatically
+* Install openSSH server and standard system utilities (use space to select)
 
 
 ### Once booted:
