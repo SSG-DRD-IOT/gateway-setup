@@ -193,10 +193,12 @@ if [ "$platform" == "$CORE_PLATFORM" ]; then
     #Install and configure Helix Device Cloud (HDC) agent
     install_hdc
 
-    #Install Atom editor modules
-    install_atom_modules
+
 
 fi
+
+#Install Atom editor modules
+install_atom_modules
 
 #Install MRAA UPM and plugins for JS
 install_mraa_upm_plugins
