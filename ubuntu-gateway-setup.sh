@@ -98,12 +98,6 @@ install_mraa_upm_plugins() {
     npm install -g jsupm_i2clcd@1.0.2-src
 }
 
-install_upm_headers() {
-    echo -e "${Y}Install UPM headers required for C/C++ programs...${NC}\n"
-    mkdir -p /usr/local/include/upm
-    cp -r utils/upm-headers/* /usr/local/include/upm
-}
-
 install_bower() {
     echo -e "${Y}Install bower module required for admin interface...${NC}\n"
     npm install -g bower
@@ -207,9 +201,6 @@ install_atom_modules
 
 #Install MRAA UPM and plugins for JS
 install_mraa_upm_plugins
-
-#Install UPM C/C++ headers
-install_upm_headers
 
 #Install and configure node-red module
 install_and_setup_node-red
