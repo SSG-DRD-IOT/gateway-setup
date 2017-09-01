@@ -2,11 +2,11 @@
 
 Below are two paths to setup the NUC Gateway with Ubuntu 16.04 and all the prerequisites to get started with our Workshops and Tutorials. The first path is for the Intel IoT Developer Kit ONLY - It is an image of the Developer Kit gateway and will not work on anything without that specific hardware. 
 
-## IoT Developer Kit NUC:
+# IoT Developer Kit NUC:
 
 # Required: DE3815TYKE NUC with 4GB Ram and Only the built in 4GB EMMC storage - This is the NUC from the IoT Developer Kit
 
-* In the main Git folder is an ISO called 4GB-NUC-UBUNTU-SCRIPT-X-XX-XXXX.iso with the Xs being the date of creation.
+* Download the iso image from: https://s3.amazonaws.com/meks3bucket/isos/4GB-NUC-UBUNTU-SCRIPT-8-10-2017.iso
 
 * Flash this iso onto a USB stick - 2GB minimum size is required. You can use any USB creation tool, if you are not sure what to use try the following:
 
