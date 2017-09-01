@@ -1,5 +1,35 @@
 # Ubuntu on NUC
 
+Below are two paths to setup the NUC Gateway with Ubuntu 16.04 and all the prerequisites to get started with our Workshops and Tutorials. The first path is for the Intel IoT Developer Kit ONLY - It is an image of the Developer Kit gateway and will not work on anything without that specific hardware. 
+
+## IoT Developer Kit NUC:
+
+# Required: DE3815TYKE NUC with 4GB Ram and Only the built in 4GB EMMC storage - This is the NUC from the IoT Developer Kit
+
+* In the main Git folder is an ISO called 4GB-NUC-UBUNTU-SCRIPT-X-XX-XXXX.iso with the Xs being the date of creation.
+
+* Flash this iso onto a USB stick - 2GB minimum size is required. You can use any USB creation tool, if you are not sure what to use try the following:
+
+- OSX: Etcher - https://etcher.io/
+- Windows: Win32 Disk Imager: https://sourceforge.net/projects/win32diskimager/
+- Linux: unetbootin: http://unetbootin.github.io/
+
+* Insert the USB with the burned iso into a usb port on the NUC and boot
+
+* At the start of boot hit f10 to access the boot menu 
+
+* Select UEFI: USB : xxxx : OS Bootloader 
+
+* This will boot into the Clonezilla interface, slect the first option and hit enter
+
+* Clonezilla should take care of the rest. After a bit it will ask you if you are sure you want to continue, enter "y" and hit enter for both questions 
+
+* The process should take about 10 minutes, after it finishes you will see a message to remove the live-medium - remove the usb at this point and hit enter - once the NUC powers off, turn it back on.
+
+* Thats it, the nuc is now ready!
+
+
+## Other NUCs:
 
 ## Install Ubuntu Server
 
