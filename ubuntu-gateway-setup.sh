@@ -18,6 +18,24 @@ GATEWAY_DIR="gateway-setup"
 CUR_DIR="${PWD##*/}"
 platform=$(cat /sys/devices/virtual/dmi/id/board_name)
 
+install_jupyter() {
+    echo -e "${Y}Install jupyter and it's dependencies...${NC}\n"
+    apt-get -y install python2.7 python-pip python-dev
+    python --version
+    pip --version
+    apt-get -y install ipython ipython-notebook
+    pip install --upgrade pip
+    pip install numpy
+    pip install imageio
+    apt-get install -y python-matplotlib
+    add-apt-repository -y ppa:mc3man/gstffmpeg-keep
+    apt-get update
+    apt-get install -y ffmpeg gstreamer0.10-ffmpeg
+    pip install moviepy
+    apt-get -y install python-opencv
+    pip install jupyter
+}
+
 install_docker() {
     echo -e "${Y}Install docker and it's dependencies...${NC}\n"
     apt-get install -y apt-transport-https
@@ -192,6 +210,8 @@ if [ "$platform" == "$CORE_PLATFORM" ]; then
     #Install and configure Helix Device Cloud (HDC) agent
     install_hdc
 
+    #Install Jupyter Notebook
+    install_jupyter
 
 
 fi
