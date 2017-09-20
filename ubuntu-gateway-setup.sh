@@ -18,6 +18,16 @@ GATEWAY_DIR="gateway-setup"
 CUR_DIR="${PWD##*/}"
 platform=$(cat /sys/devices/virtual/dmi/id/board_name)
 
+install_pahomqqt() {
+
+    echo -e "${Y}Install paho mqqt client...${NC}\n"
+    cd ~/.
+    git clone https://github.com/eclipse/paho.mqtt.c.git
+    cd ~/paho.mqtt.c
+    make install
+    
+}
+
 install_jupyter() {
     echo -e "${Y}Install jupyter and it's dependencies...${NC}\n"
     apt-get -y install python2.7 python-pip python-dev
@@ -213,6 +223,8 @@ if [ "$platform" == "$CORE_PLATFORM" ]; then
     #Install Jupyter Notebook
     install_jupyter
 
+    #Install paho mqqt
+    install_pahomqqt
 
 fi
 
