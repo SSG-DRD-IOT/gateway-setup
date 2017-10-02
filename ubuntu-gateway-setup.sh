@@ -49,6 +49,7 @@ install_jupyter() {
 install_docker() {
     echo -e "${Y}Install docker and it's dependencies...${NC}\n"
     apt-get install -y apt-transport-https
+    apt-get install -y curl
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
     apt-key fingerprint 0EBFCD88
     add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
@@ -83,12 +84,14 @@ install_atom_modules() {
 
 install_node() {
     echo -e "${Y}Install Node..${NC}\n"
+    apt-get install -y curl
     curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
     apt-get install -y nodejs
 }
 
 install_and_setup_node-red() {
     echo -e "${Y}Install Node-Red and it's UPM Grove kit npm packages...${NC}\n"
+    cd /home/nuc-user/repos/gateway-setup
     npm install -g node-red
     npm install -g node-red-contrib-upm@0.3.5
 
@@ -120,10 +123,13 @@ install_mraa_upm_plugins() {
 
     echo -e "${Y}Install MRAA and UPM plugins for java script...${NC}\n"
     #Install MRAA & UPM plugins for java script
-    npm install -g mraa@1.7.0
-    #npm install -g upm
-    npm install -g jsupm_grove@1.0.2-src
-    npm install -g jsupm_i2clcd@1.0.2-src
+    #npm install -g mraa@1.7.0
+    npme install -g mraa
+    npm install -g upm
+    #npm install -g jsupm_grove@1.0.2-src
+    #npm install -g jsupm_i2clcd@1.0.2-src
+    npm install -g jsupm_grove
+    npm install -g jsupm_i2ccd
 }
 
 install_bower() {
