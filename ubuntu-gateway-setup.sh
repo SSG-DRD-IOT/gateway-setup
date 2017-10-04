@@ -124,12 +124,12 @@ install_mraa_upm_plugins() {
     echo -e "${Y}Install MRAA and UPM plugins for java script...${NC}\n"
     #Install MRAA & UPM plugins for java script
     #npm install -g mraa@1.7.0
-    npme install -g mraa
+    npm install -g mraa
     npm install -g upm
     #npm install -g jsupm_grove@1.0.2-src
     #npm install -g jsupm_i2clcd@1.0.2-src
     npm install -g jsupm_grove
-    npm install -g jsupm_i2ccd
+    npm install -g jsupm_i2clcd
 }
 
 install_bower() {
