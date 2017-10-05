@@ -44,6 +44,9 @@ install_jupyter() {
     pip install moviepy
     apt-get -y install python-opencv
     pip install jupyter
+    npm install -g ijavascript
+    ijs
+    chown -R nuc-user:nuc-user /home/nuc-user/.local/share/jupyter
 }
 
 install_docker() {
