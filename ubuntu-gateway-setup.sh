@@ -18,6 +18,25 @@ GATEWAY_DIR="gateway-setup"
 CUR_DIR="${PWD##*/}"
 platform=$(cat /sys/devices/virtual/dmi/id/board_name)
 
+download__industrial_labs() {
+
+    echo -e "${Y}Downloading Industrial Labs...${NC}\n"
+    cd ~/.
+    mkdir repos
+    chown -R nuc-user:nuc-user repos
+    cd repos
+    git clone https://github.com/SSG-DRD-IOT/lab-industrial-setup-development-environment.git
+    git clone https://github.com/SSG-DRD-IOT/lab-sensors-c.git
+    git clone https://github.com/SSG-DRD-IOT/lab-protocols-mqtt-c.git
+    git clone https://github.com/SSG-DRD-IOT/lab-sensors-arduino.git
+    git clone https://github.com/SSG-DRD-IOT/lab-sensors-opc-ua.git
+    git clone https://github.com/SSG-DRD-IOT/lab-iot-automation.git
+    git clone https://github.com/SSG-DRD-IOT/lab-nuc-security.git
+    git clone https://github.com/SSG-DRD-IOT/lab-opencv-examples.git
+    cd ~/.
+    chown -R nuc-user:nuc-user repos
+}
+  
 install_pahomqqt() {
 
     echo -e "${Y}Install paho mqqt client...${NC}\n"
@@ -189,6 +208,7 @@ apt-get install -y software-properties-common build-essential libssl-dev libkrb5
 apt-get install -y avahi-daemon avahi-autoipd avahi-utils libavahi-compat-libdnssd-dev python-dev
 apt-get install -y libtool automake
 apt-get install -y openssh-client openssh-server
+apt-get install -y libjson0 libjson0-dev
 
 echo -e "${Y}Modify the sshd_config file for ssh access to root user, it is disabled by default and restrart sshd...${NC}\n"
 sed -ie 's/prohibit-password/yes/g' /etc/ssh/sshd_config
@@ -234,6 +254,9 @@ if [ "$platform" == "$CORE_PLATFORM" ]; then
 
     #Install paho mqqt
     install_pahomqqt
+    
+    #Download the repos for Industrial Labs
+    download__industrial_labs
 
 fi
 
