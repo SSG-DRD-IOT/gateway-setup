@@ -14,17 +14,17 @@ NC='\033[0m'   #No color
 #Get the board details
 ATOM_PLATFORM="DE3815TYKH"
 CORE_PLATFORM="NUC5i7RYB"
-GATEWAY_DIR="gateway-setup"
+GATEWAY_DIR="gateway-setup-master"
 CUR_DIR="${PWD##*/}"
 platform=$(cat /sys/devices/virtual/dmi/id/board_name)
 
-download__industrial_labs() {
+download_industrial_labs() {
 
     echo -e "${Y}Downloading Industrial Labs...${NC}\n"
     cd ~/.
-    mkdir repos
-    chown -R nuc-user:nuc-user repos
-    cd repos
+    mkdir answers
+    chown -R nuc-user:nuc-user answers
+    cd answers
     git clone https://github.com/SSG-DRD-IOT/lab-industrial-setup-development-environment.git
     git clone https://github.com/SSG-DRD-IOT/lab-sensors-c.git
     git clone https://github.com/SSG-DRD-IOT/lab-protocols-mqtt-c.git
@@ -34,9 +34,23 @@ download__industrial_labs() {
     git clone https://github.com/SSG-DRD-IOT/lab-nuc-security.git
     git clone https://github.com/SSG-DRD-IOT/lab-opencv-examples.git
     cd ~/.
-    chown -R nuc-user:nuc-user repos
+    chown -R nuc-user:nuc-user answers
 }
-  
+
+install_ip_addr_c() {
+
+    echo -e "${Y}Install ip_addr_c as a service...${NC}\n"
+    cd ~/.
+    git clone https://github.com/SSG-DRD-IOT/ip_address_c.git
+    cd ip_address_c
+    make all
+    cp ip_addr_c /usr/local/bin/ip_addr_c
+    cp ip_addr_c.service /etc/systemd/system/ip_addr_c.service
+    cd ~/.
+    systemctl enable ip_addr_c.service
+    rm -rf ip_address_c
+}
+
 install_pahomqqt() {
 
     echo -e "${Y}Install paho mqqt client...${NC}\n"
@@ -109,31 +123,6 @@ install_node() {
     apt-get install -y curl
     curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
     apt-get install -y nodejs
-}
-
-install_and_setup_node-red() {
-    echo -e "${Y}Install Node-Red and it's UPM Grove kit npm packages...${NC}\n"
-    cd /home/nuc-user/repos/gateway-setup
-    npm install -g node-red
-    npm install -g node-red-contrib-upm@0.3.5
-
-    echo -e "${Y}Create & add Node-Red and nuc-user user to dialout group for ttyACM0 access${NC}\n"
-    useradd node-red -G dialout
-    mkdir -p /home/node-red/.node-red
-    chown -R node-red:node-red /home/node-red
-
-    echo -e "${Y}Setup imraa & Node-Red services and default flows...${NC}\n"
-    cp conf_files/node-red/node-red-experience.timer /lib/systemd/system/node-red-experience.timer
-    cp conf_files/node-red/node-red-experience.service /lib/systemd/system/node-red-experience.service
-    cp conf_files/mraa-imraa.service /lib/systemd/system/mraa-imraa.service
-    cp conf_files/node-red/flows_ip.json /home/node-red/.node-red/flows_$HOSTNAME.json
-    cp utils/dfu-util /usr/bin/
-
-    #run daemon-reload for this to take effect
-    systemctl daemon-reload
-
-    #Enable node-red timer which will start the service after a short time on boot
-    systemctl enable node-red-experience.timer
 }
 
 install_mraa_upm_plugins() {
@@ -209,6 +198,8 @@ apt-get install -y avahi-daemon avahi-autoipd avahi-utils libavahi-compat-libdns
 apt-get install -y libtool automake
 apt-get install -y openssh-client openssh-server
 apt-get install -y libjson0 libjson0-dev
+apt-get install -y cmake
+apt-get install -y git
 
 echo -e "${Y}Modify the sshd_config file for ssh access to root user, it is disabled by default and restrart sshd...${NC}\n"
 sed -ie 's/prohibit-password/yes/g' /etc/ssh/sshd_config
@@ -230,7 +221,7 @@ if [ -n "$PROXY_VAR" ]; then
 fi
 
 #Configuration required only for our labs running core i7
-if [ "$platform" == "$CORE_PLATFORM" ]; then
+#if [ "$platform" == "$CORE_PLATFORM" ]; then
     echo -e "${Y}Install MongoDB package...${NC}\n"
     apt-get install -y mongodb
 
@@ -256,18 +247,18 @@ if [ "$platform" == "$CORE_PLATFORM" ]; then
     install_pahomqqt
     
     #Download the repos for Industrial Labs
-    download__industrial_labs
+    download_industrial_labs
 
-fi
+    #Download and install ip_addr_c
+    install_ip_addr_c
+
+#fi
 
 #Install Atom editor modules
 install_atom_modules
 
 #Install MRAA UPM and plugins for JS
 install_mraa_upm_plugins
-
-#Install and configure node-red module
-install_and_setup_node-red
 
 #Install bower module for admin interface lab
 install_bower
