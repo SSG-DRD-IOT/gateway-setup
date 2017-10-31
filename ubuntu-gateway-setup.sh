@@ -40,12 +40,14 @@ download_industrial_labs() {
 install_ip_addr_c() {
 
     echo -e "${Y}Install ip_addr_c as a service...${NC}\n"
+    apt-get install -y libpcap0.8-dev
     cd ~/.
     git clone https://github.com/SSG-DRD-IOT/ip_address_c.git
     cd ip_address_c
     make all
     cp ip_addr_c /usr/local/bin/ip_addr_c
     cp ip_addr_c.service /etc/systemd/system/ip_addr_c.service
+    cp ip_addr_c.timer /etc/systemd/system/ip_addr_c.timer
     cd ~/.
     systemctl enable ip_addr_c.service
     rm -rf ip_address_c
