@@ -14,6 +14,7 @@ NC='\033[0m'   #No color
 #Get the board details
 ATOM_PLATFORM="DE3815TYKH"
 CORE_PLATFORM="NUC5i7RYB"
+UP2_PLATFORM="UP-APL01"
 GATEWAY_DIR="gateway-setup-master"
 CUR_DIR="${PWD##*/}"
 platform=$(cat /sys/devices/virtual/dmi/id/board_name)
@@ -44,8 +45,14 @@ install_ip_addr_c() {
     cd ~/.
     git clone https://github.com/SSG-DRD-IOT/ip_address_c.git
     cd ip_address_c
-    make all
-    cp ip_addr_c /usr/local/bin/ip_addr_c
+    #check to see if we need the mraa subplatform
+    if [ "$platform" == "$UP2_PLATFORM" ]; then
+	make up2
+	cp ip_addr_c_up2 /usr/local/bin/ip_addr_c
+    else
+	make all
+	cp ip_addr_c /usr/local/bin/ip_addr_c
+    fi
     cp ip_addr_c.service /etc/systemd/system/ip_addr_c.service
     cp ip_addr_c.timer /etc/systemd/system/ip_addr_c.timer
     cd ~/.
