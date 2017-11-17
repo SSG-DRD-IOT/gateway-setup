@@ -24,7 +24,11 @@ download_industrial_labs() {
     echo -e "${Y}Downloading Industrial Labs...${NC}\n"
     cd ~/.
     mkdir answers
-    chown -R nuc-user:nuc-user answers
+        if [ "$platform" == "$UP2_PLATFORM" ]; then
+	chown -R upsquared:upsquared answers
+    else
+	chown -R nuc-user:nuc-user answers
+    fi
     cd answers
     git clone https://github.com/SSG-DRD-IOT/lab-industrial-setup-development-environment.git
     git clone https://github.com/SSG-DRD-IOT/lab-sensors-c.git
@@ -35,7 +39,12 @@ download_industrial_labs() {
     git clone https://github.com/SSG-DRD-IOT/lab-nuc-security.git
     git clone https://github.com/SSG-DRD-IOT/lab-opencv-examples.git
     cd ~/.
-    chown -R nuc-user:nuc-user answers
+    if [ "$platform" == "$UP2_PLATFORM" ]; then
+	chown -R upsquared:upsquared answers
+    else
+	chown -R nuc-user:nuc-user answers
+    fi
+    
 }
 
 install_ip_addr_c() {
@@ -88,7 +97,11 @@ install_jupyter() {
     pip install jupyter
     npm install -g ijavascript
     ijs
-    chown -R nuc-user:nuc-user /home/nuc-user/.local/share/jupyter
+    if [ "$platform" == "$UP2_PLATFORM" ]; then
+	chown -R upsquared:upsquared /home/upsquared/.local/share/jupyter
+    else
+	chown -R nuc-user:nuc-user /home/nuc-user/.local/share/jupyter
+    fi
 }
 
 install_docker() {
@@ -278,8 +291,14 @@ echo 'export NODE_PATH=/usr/lib/node_modules/' >> ~/.bashrc
 #script exits
 source ~/.bashrc
 
-echo -e "${Y}Add nuc-user to dialout group for access to ttyACM0 device...${NC}\n"
-usermod nuc-user -a -G dialout
+echo -e "${Y}Add nuc-user or upsquared to dialout group for access to ttyACM0 device...${NC}\n"
+
+if [ "$platform" == "$UP2_PLATFORM" ]; then
+    usermod upsquared -a -G dialout
+else
+    usermod nuc-user -a -G dialout
+fi
+
 
 echo -e "\n${Y}********** End of Script ***********${NC}\n"
 echo -e "${Y}********** Rebooting after installation **********${NC}\n"
