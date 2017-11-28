@@ -243,47 +243,47 @@ if [ -n "$PROXY_VAR" ]; then
 fi
 
 #Configuration required only for our labs running core i7
-#if [ "$platform" == "$CORE_PLATFORM" ]; then
-    echo -e "${Y}Install MongoDB package...${NC}\n"
-    apt-get install -y mongodb
-
-    echo -e "${Y}Install mosquitto broker and client modules...${NC}\n"
-    apt-get install -y mosquitto mosquitto-clients
-    
+if [ "$platform" == "$CORE_PLATFORM" ]; then
     echo -e "${Y}Install InfluxDB database...${NC}\n"
-    apt-get install -y influxdb
+    #apt-get install -y influxdb
 
     echo -e "${Y}Install grafana module...${NC}\n"
-    apt-get install -y grafana
+    #apt-get install -y grafana
 
     #Install and setup docker tool
     install_docker
 
+    #Install MRAA UPM and plugins for JS
+    install_mraa_upm_plugins
+
     #Install and configure Helix Device Cloud (HDC) agent
-    install_hdc
+    #install_hdc
 
-    #Install Jupyter Notebook
-    install_jupyter
+fi
 
-    #Install paho mqqt
-    install_pahomqqt
-    
-    #Download the repos for Industrial Labs
-    download_industrial_labs
+echo -e "${Y}Install MongoDB package...${NC}\n"
+apt-get install -y mongodb
 
-    #Download and install ip_addr_c
-    install_ip_addr_c
-
-#fi
+echo -e "${Y}Install mosquitto broker and client modules...${NC}\n"
+apt-get install -y mosquitto mosquitto-clients
 
 #Install Atom editor modules
 install_atom_modules
 
-#Install MRAA UPM and plugins for JS
-install_mraa_upm_plugins
-
 #Install bower module for admin interface lab
 install_bower
+
+#Install Jupyter Notebook
+install_jupyter
+
+#Install paho mqqt
+install_pahomqtt
+
+#Download the repos for Industrial Labs
+download_industrial_labs
+
+#Download and install ip_addr_c
+install_ip_addr_c
 
 echo -e "${Y}Export node path(NODE_PATH) by adding it to bashrc file...${NC}\n"
 echo 'export NODE_PATH=/usr/lib/node_modules/' >> ~/.bashrc
