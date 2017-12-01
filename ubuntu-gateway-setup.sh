@@ -17,7 +17,7 @@ CORE_PLATFORM="NUC5i7RYB"
 UP2_PLATFORM="UP-APL01"
 GATEWAY_DIR="gateway-setup-master"
 CUR_DIR="${PWD##*/}"
-platform=$(cat /sys/devices/virtual/dmi/id/board_name)
+  platform=$(cat /sys/devices/virtual/dmi/id/board_name)
 
 download_industrial_labs() {
 
@@ -44,7 +44,7 @@ download_industrial_labs() {
     else
 	chown -R nuc-user:nuc-user answers
     fi
-    
+
 }
 
 install_ip_addr_c() {
@@ -76,7 +76,7 @@ install_pahomqqt() {
     git clone https://github.com/eclipse/paho.mqtt.c.git
     cd ~/paho.mqtt.c
     make install
-    
+
 }
 
 install_jupyter() {
