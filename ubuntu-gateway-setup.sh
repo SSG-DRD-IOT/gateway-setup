@@ -17,7 +17,7 @@ CORE_PLATFORM="NUC5i7RYB"
 UP2_PLATFORM="UP-APL01"
 GATEWAY_DIR="gateway-setup-master"
 CUR_DIR="${PWD##*/}"
-platform=$(cat /sys/devices/virtual/dmi/id/board_name)
+  platform=$(cat /sys/devices/virtual/dmi/id/board_name)
 
 download_industrial_labs() {
 
