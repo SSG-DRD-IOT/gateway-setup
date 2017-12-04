@@ -44,7 +44,7 @@ download_industrial_labs() {
     else
 	chown -R nuc-user:nuc-user answers
     fi
-    
+
 }
 
 install_ip_addr_c() {
@@ -76,7 +76,7 @@ install_pahomqqt() {
     git clone https://github.com/eclipse/paho.mqtt.c.git
     cd ~/paho.mqtt.c
     make install
-    
+
 }
 
 install_jupyter() {
@@ -298,7 +298,6 @@ if [ "$platform" == "$UP2_PLATFORM" ]; then
 else
     usermod nuc-user -a -G dialout
 fi
-
 
 echo -e "\n${Y}********** End of Script ***********${NC}\n"
 echo -e "${Y}********** Rebooting after installation **********${NC}\n"
