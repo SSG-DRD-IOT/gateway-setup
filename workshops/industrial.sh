@@ -20,4 +20,5 @@ declare -a modules=(
 for i in "${modules[@]}"
 do
    source "modules/$i.sh"
+   echo -e "${Y}${i} Lab Module...${NC}"
 done
