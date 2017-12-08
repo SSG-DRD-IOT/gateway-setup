@@ -37,7 +37,7 @@ def npm_install(package):
     """
     if npm_check(package) == False:
         with settings(warn_only=True):
-            sudo("npm install %s" % package)
+            sudo("npm install -g %s" % package)
 
 def easy_install(package):
     """

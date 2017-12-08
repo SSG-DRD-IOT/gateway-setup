@@ -1,4 +1,5 @@
 from fabric.api import *
+from fabric.contrib import *
 import os.path
 import helper
 
@@ -15,10 +16,9 @@ def watchman():
 
     helper.apt_install("autotools-dev")
     helper.apt_install("automake")
+    helper.npm_install("nuclide@0.270.0")
 
-    #sudo("npm install -g nuclide@0.270.0")
-
-    if not os.path.isfile("/usr/local/bin/watchman"):
+    if not files.exists("/usr/local/bin/watchman"):
         with settings(warn_only=True):
             run("git clone https://github.com/facebook/watchman.git")
             with cd("./watchman"), settings(warn_only=True):
