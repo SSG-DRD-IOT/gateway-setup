@@ -1,22 +1,21 @@
 from fabric.api import *
 from fabric.contrib import *
 import os.path
-import helper
+from helper import *
 
 def nodejs():
     """ Download and install nodejs """
     prog = "nodejs"
-    if not helper.check(prog):
-        print("%s is NOT installed" % prog)
+    if not apt_check(prog):
         run("curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -")
-        helper.apt_install(prog)
+        apt_install(prog)
 
 def watchman():
     """ Download and install watchman """
 
-    helper.apt_install("autotools-dev")
-    helper.apt_install("automake")
-    helper.npm_install("nuclide@0.270.0")
+    apt_install("autotools-dev")
+    apt_install("automake")
+    npm_install("nuclide@0.270.0")
 
     if not files.exists("/usr/local/bin/watchman"):
         with settings(warn_only=True):
