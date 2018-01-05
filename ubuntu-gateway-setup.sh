@@ -41,9 +41,15 @@ download_industrial_labs() {
     cd ~/.
     if [ "$platform" == "$UP2_PLATFORM" ]; then
 	chown -R upsquared:upsquared answers
+	sed -i 's/nuc-user/upsquared/g' answers/lab-opencv-examples/config/jupyter.service
+	mkdir .jupyter
     else
 	chown -R nuc-user:nuc-user answers
     fi
+    cp answers/lab-opencv-examples/config/jupyter.service /etc/systemd/system/jupyter.service
+    cp answers/lab-opencv-examples/config/jupyter_notebook_config.py .jupyter/
+    cp answers/lab-opencv-examples/config/jupyter_notebook_config.json .jupyter/
+    systemctl enable jupyter.service
     
 }
 
@@ -69,7 +75,7 @@ install_ip_addr_c() {
     rm -rf ip_address_c
 }
 
-install_pahomqqt() {
+install_pahomqtt() {
 
     echo -e "${Y}Install paho mqqt client...${NC}\n"
     cd ~/.
@@ -242,24 +248,22 @@ if [ -n "$PROXY_VAR" ]; then
     npm config set https-proxy $PROXY_VAR
 fi
 
-#Configuration required only for our labs running core i7
-if [ "$platform" == "$CORE_PLATFORM" ]; then
-    echo -e "${Y}Install InfluxDB database...${NC}\n"
-    #apt-get install -y influxdb
+#Configuration required only for our labs
 
-    echo -e "${Y}Install grafana module...${NC}\n"
-    #apt-get install -y grafana
+#echo -e "${Y}Install InfluxDB database...${NC}\n"
+#apt-get install -y influxdb
 
-    #Install and setup docker tool
-    install_docker
+#echo -e "${Y}Install grafana module...${NC}\n"
+#apt-get install -y grafana
 
-    #Install MRAA UPM and plugins for JS
-    install_mraa_upm_plugins
+#Install and setup docker tool
+install_docker
 
-    #Install and configure Helix Device Cloud (HDC) agent
-    #install_hdc
+#Install MRAA UPM and plugins for JS
+install_mraa_upm_plugins
 
-fi
+#Install and configure Helix Device Cloud (HDC) agent
+#install_hdc
 
 echo -e "${Y}Install MongoDB package...${NC}\n"
 apt-get install -y mongodb
