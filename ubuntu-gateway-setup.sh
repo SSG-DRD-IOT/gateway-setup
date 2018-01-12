@@ -31,10 +31,16 @@ download_industrial_labs() {
     fi
     cd answers
     git clone https://github.com/SSG-DRD-IOT/lab-industrial-setup-development-environment.git
-    git clone https://github.com/SSG-DRD-IOT/lab-sensors-c.git
-    git clone https://github.com/SSG-DRD-IOT/lab-protocols-mqtt-c.git
-    git clone https://github.com/SSG-DRD-IOT/lab-sensors-arduino.git
-    git clone https://github.com/SSG-DRD-IOT/lab-sensors-opc-ua.git
+    git clone https://github.com/SSG-DRD-IOT/lab-digital-sensors-arduino
+    git clone https://github.com/SSG-DRD-IOT/lab-pwm-sensors-arduino
+    git clone https://github.com/SSG-DRD-IOT/lab-lcd-arduino
+    git clone https://github.com/SSG-DRD-IOT/lab-IP-to-LCD-Arduino
+    git clone https://github.com/SSG-DRD-IOT/lab-temperature-humidity-arduino
+    git clone https://github.com/SSG-DRD-IOT/lab-rotary-angle-sensor-c
+    git clone https://github.com/SSG-DRD-IOT/lab-protocols-mqtt-arduino
+    git clone https://github.com/SSG-DRD-IOT/lab-sensors-opc-ua
+    git clone https://github.com/SSG-DRD-IOT/virtual-sensor
+    git clone https://github.com/SSG-DRD-IOT/lab-automation-jupyter    
     git clone https://github.com/SSG-DRD-IOT/lab-iot-automation.git
     git clone https://github.com/SSG-DRD-IOT/lab-nuc-security.git
     git clone https://github.com/SSG-DRD-IOT/lab-opencv-examples.git
