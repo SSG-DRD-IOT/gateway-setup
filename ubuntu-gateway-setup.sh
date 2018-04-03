@@ -15,7 +15,7 @@ NC='\033[0m'   #No color
 ATOM_PLATFORM="DE3815TYKH"
 CORE_PLATFORM="NUC5i7RYB"
 UP2_PLATFORM="UP-APL01"
-GATEWAY_DIR="gateway-setup-master"
+GATEWAY_DIR="gateway-setup"
 CUR_DIR="${PWD##*/}"
 platform=$(cat /sys/devices/virtual/dmi/id/board_name)
 
